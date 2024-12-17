@@ -1,1 +1,23 @@
+workflows:
+  ios-app:
+    name: iOS Workflow
+    environment:
+      xcode: latest
+    scripts:
+      - name: Install dependencies
+        script: |
+          gem install bundler
+          bundle install
+      - name: Build the app
+        script: |
+          xcodebuild -workspace YourApp.xcworkspace \
+          -scheme YourScheme \
+          -sdk iphoneos \
+          -configuration Release
+    artifacts:
+      - build/ios/Release-iphoneos/*.ipa
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
 
